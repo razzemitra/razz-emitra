@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Razz E Mitra & CSC Centre - डिजिटल डॉक्यूमेंट पोर्टल</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Noto Sans Devanagari -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans Devanagari', sans-serif;
+            background-color: #f3f6fb;
+        }
+        .govt-gradient {
+            background: linear-gradient(135deg, #0f294a 0%, #1e4276 60%, #16335b 100%);
+        }
+        .saffron-accent {
+            background: linear-gradient(90deg, #ff6b00 0%, #ff8c00 100%);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        /* Print styles for certificate receipt */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #printableCertificate, #printableCertificate * {
+                visibility: visible;
+            }
+            #printableCertificate {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                box-shadow: none !important;
+                border: 2px solid #0f294a !important;
+            }
+        }
+    </style>
+</head>
+<body class="text-slate-800 min-h-screen flex flex-col">
+
+    <!-- Top Tricolor Accent Bar -->
+    <div class="h-1.5 w-full flex">
+        <div class="w-1/3 bg-[#FF9933]"></div>
+        <div class="w-1/3 bg-white"></div>
+        <div class="w-1/3 bg-[#138808]"></div>
+    </div>
+
+    <!-- Header & Branding -->
+    <header class="govt-gradient text-white shadow-lg sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                <!-- Logo & Centre Info -->
+                <div class="flex items-center space-x-3.5">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center shrink-0 shadow-inner">
+                        <i class="fa-solid fa-landmark text-2xl sm:text-3xl text-[#FF9933]"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <h1 class="text-lg sm:text-2xl font-bold tracking-tight text-white">
+                                Razz E Mitra & CSC Centre
+                            </h1>
+                            <span class="text-xs font-medium bg-[#FF6b00] text-white px-2 py-0.5 rounded-full shadow-sm">
+                                राज ई-मित्र
+                            </span>
+                        </div>
+                        <p class="text-xs sm:text-sm text-blue-100 mt-0.5 flex items-center gap-1.5">
+                            <i class="fa-solid fa-location-dot text-[#FF9933]"></i>
+                            <span>कोलासर पश्चिम, बज्जू | डिजिटल डॉक्यूमेंट डाउनलोड पोर्टल</span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Navigation Toggle -->
+                <div class="flex items-center bg-slate-900/50 p-1 rounded-xl border border-white/15 self-start md:self-auto">
+                    <button id="btnCustomerMode" onclick="switchMode('customer')" 
+                        class="flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 bg-white text-[#0f294a] shadow">
+                        <i class="fa-solid fa-users"></i>
+                        <span>ग्राहक पोर्टल (Customer)</span>
+                    </button>
+                    <button id="btnAdminMode" onclick="switchMode('admin')" 
+                        class="flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 text-blue-100 hover:text-white">
+                        <i class="fa-solid fa-user-shield"></i>
+                        <span>एडमिन पैनल (Admin)</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+
+        <!-- ========================================== -->
+        <!-- 1. CUSTOMER PORTAL VIEW                    -->
+        <!-- ========================================== -->
+        <section id="customerView" class="space-y-6">
+            
+            <!-- Info Banner -->
+            <div class="bg-blue-50 border-l-4 border-[#0f294a] rounded-r-xl p-4 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="flex items-start sm:items-center gap-3">
+                    <div class="w-9 h-9 rounded-full bg-[#0f294a] text-white flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
+                        <i class="fa-solid fa-circle-info"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-sm sm:text-base font-bold text-[#0f294a]">घर बैठे अपना तैयार डॉक्यूमेंट डाउनलोड करें</h2>
+                        <p class="text-xs sm:text-sm text-slate-600">नीचे अपना नाम और पिता का नाम डालकर सर्च करें और सामान्य शुल्क (Nominal Fee) जमा कर तुरंत PDF प्राप्त करें।</p>
+                    </div>
+                </div>
+                <div class="text-xs font-semibold text-emerald-700 bg-emerald-100 px-3 py-1.5 rounded-lg self-start sm:self-center shrink-0">
+                    <i class="fa-solid fa-bolt mr-1"></i> 24x7 त्वरित सेवा
+                </div>
+            </div>
+
+            <!-- Hero Search Card -->
+            <div class="bg-white rounded-2xl shadow-md border border-slate-200/80 overflow-hidden">
+                <div class="bg-slate-50 border-b border-slate-200 px-5 py-3.5 flex items-center justify-between">
+                    <h3 class="font-bold text-slate-800 text-base sm:text-lg flex items-center gap-2">
+                        <i class="fa-solid fa-magnifying-glass text-[#ff6b00]"></i>
+                        <span>अपना डॉक्यूमेंट खोजें (Search Document)</span>
+                    </h3>
+                    <button onclick="showAllSampleRecords()" class="text-xs sm:text-sm font-semibold text-[#0f294a] hover:text-[#ff6b00] underline decoration-dotted underline-offset-4 transition">
+                        सभी रिकॉर्ड्स दिखाएं (Show All)
+                    </button>
+                </div>
+
+                <form id="searchForm" onsubmit="handleSearch(event)" class="p-5 sm:p-6 space-y-5">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+                        <!-- Applicant Name -->
+                        <div>
+                            <label for="searchApplicantName" class="block text-sm font-semibold text-slate-700 mb-1.5">
+                                आवेदक का नाम (Applicant Name) <span class="text-red-500">*</span>
+                            </label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
+                                    <i class="fa-solid fa-user"></i>
+                                </span>
+                                <input type="text" id="searchApplicantName" placeholder="जैसे: Rameshwar Lal या रामेश्वर"
+                                    class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-[#0f294a] focus:border-[#0f294a] outline-none transition text-sm">
+                            </div>
+                        </div>
+
+                        <!-- Father's Name -->
+                        <div>
+                            <label for="searchFatherName" class="block text-sm font-semibold text-slate-700 mb-1.5">
+                                पिता / पति का नाम (Father/Husband Name)
+                            </label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
+                                    <i class="fa-solid fa-user-tie"></i>
+                                </span>
+                                <input type="text" id="searchFatherName" placeholder="जैसे: Hanuman Ram या हनुमान"
+                                    class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-[#0f294a] focus:border-[#0f294a] outline-none transition text-sm">
+                            </div>
+                        </div>
+
+                        <!-- Document Type Filter -->
+                        <div>
+                            <label for="searchDocType" class="block text-sm font-semibold text-slate-700 mb-1.5">
+                                डॉक्यूमेंट का प्रकार (Document Type)
+                            </label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
+                                    <i class="fa-solid fa-file-lines"></i>
+                                </span>
+                                <select id="searchDocType"
+                                    class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-[#0f294a] focus:border-[#0f294a] outline-none transition text-sm bg-white">
+                                    <option value="ALL">सभी डॉक्यूमेंट (All Documents)</option>
+                                    <option value="जाति प्रमाण पत्र (Caste Certificate)">जाति प्रमाण पत्र (Caste Certificate)</option>
+                                    <option value="मूल निवास प्रमाण पत्र (Bonafide Residence)">मूल निवास प्रमाण पत्र (Bonafide Residence)</option>
+                                    <option value="जन आधार कार्ड (Jan Aadhaar)">जन आधार कार्ड (Jan Aadhaar)</option>
+                                    <option value="राशन कार्ड (Ration Card)">राशन कार्ड (Ration Card)</option>
+                                    <option value="आय प्रमाण पत्र (Income Certificate)">आय प्रमाण पत्र (Income Certificate)</option>
+                                    <option value="ड्राइविंग लाइसेंस (Driving Licence)">ड्राइविंग लाइसेंस (Driving Licence)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Search Actions -->
+                    <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+                        <p class="text-xs text-slate-500">
+                            <i class="fa-solid fa-shield-halved text-emerald-600 mr-1"></i>
+                            गोपनीयता सुरक्षा: डॉक्यूमेंट की PDF केवल निर्धारित शुल्क भुगतान के बाद ही डाउनलोड होगी।
+                        </p>
+                        <div class="flex items-center gap-3 w-full sm:w-auto">
+                            <button type="button" onclick="resetSearch()"
+                                class="flex-1 sm:flex-none px-4 py-2.5 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-100 font-semibold text-sm transition">
+                                रीसेट (Reset)
+                            </button>
+                            <button type="submit"
+                                class="flex-1 sm:flex-none saffron-accent hover:opacity-95 text-white px-6 py-2.5 rounded-xl font-bold text-sm shadow-md transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-search"></i>
+                                <span>डॉक्यूमेंट खोजें (Search)</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Search Results Area -->
+            <div id="resultsContainer" class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <h3 id="resultsHeading" class="text-base sm:text-lg font-bold text-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-folder-open text-[#0f294a]"></i>
+                        <span>उपलब्ध तैयार डॉक्यूमेंट्स (Ready Documents)</span>
+                    </h3>
+                    <span id="resultsCountBadge" class="text-xs font-bold bg-blue-100 text-[#0f294a] px-3 py-1 rounded-full">
+                        0 रिकॉर्ड्स
+                    </span>
+                </div>
+
+                <!-- Results List (Cards on Mobile / Clean Table-Cards on Desktop) -->
+                <div id="documentsList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Populated via JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- 2. ADMIN PANEL VIEW                        -->
+        <!-- ========================================== -->
+        <section id="adminView" class="hidden space-y-6">
+
+            <!-- PIN Login Gate -->
+            <div id="adminPinGate" class="max-w-md mx-auto bg-white rounded-2xl shadow-lg border border-slate-200 p-6 sm:p-8 text-center my-6">
+                <div class="w-16 h-16 rounded-2xl govt-gradient text-white flex items-center justify-center mx-auto mb-4 shadow-md">
+                    <i class="fa-solid fa-lock text-2xl text-[#FF9933]"></i>
+                </div>
+                <h2 class="text-xl font-bold text-slate-800">एडमिन लॉगिन (Shop Owner Only)</h2>
+                <p class="text-sm text-slate-500 mt-1">Razz E Mitra & CSC Centre डैशबोर्ड खोलने के लिए 4-अंकों का PIN दर्ज करें।</p>
+                
+                <div class="mt-3 inline-block bg-amber-50 border border-amber-200 text-amber-800 text-xs font-medium px-3 py-1.5 rounded-lg">
+                    <i class="fa-solid fa-lightbulb mr-1 text-amber-500"></i> डेमो के लिए डिफ़ॉल्ट PIN: <strong>1234</strong>
+                </div>
+
+                <form onsubmit="verifyAdminPin(event)" class="mt-5 space-y-4">
+                    <input type="password" id="adminPinInput" maxlength="4" placeholder="••••" required
+                        class="w-44 mx-auto block text-center text-2xl tracking-[0.5em] font-bold py-2.5 px-4 rounded-xl border-2 border-slate-300 focus:border-[#0f294a] focus:ring-2 focus:ring-[#0f294a]/20 outline-none">
+                    <p id="pinErrorMsg" class="text-xs text-red-600 font-semibold hidden">गलत PIN! कृपया 1234 दर्ज करें।</p>
+                    <button type="submit"
+                        class="w-full govt-gradient hover:opacity-95 text-white font-bold py-3 rounded-xl shadow-md transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        <span>डैशबोर्ड अनलॉक करें</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Unlocked Admin Dashboard -->
+            <div id="adminDashboardContent" class="hidden space-y-6">
+                
+                <!-- Top Bar with Logout -->
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+                    <div>
+                        <h2 class="text-lg sm:text-xl font-bold text-[#0f294a] flex items-center gap-2">
+                            <i class="fa-solid fa-gauge-high text-[#ff6b00]"></i>
+                            <span>कियोस्क संचालक डैशबोर्ड (Admin Panel)</span>
+                        </h2>
+                        <p class="text-xs text-slate-500">नए तैयार डॉक्यूमेंट अपलोड करें और ग्राहकों को WhatsApp लिंक भेजें।</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="resetDemoData()" class="text-xs font-semibold px-3 py-2 rounded-lg border border-slate-300 text-slate-600 hover:bg-slate-100 transition">
+                            <i class="fa-solid fa-rotate-left mr-1"></i> डेमो डेटा रीसेट
+                        </button>
+                        <button onclick="logoutAdmin()" class="text-xs font-semibold px-3.5 py-2 rounded-lg bg-red-50 text-red-600 border border-red-200 hover:bg-red-100 transition">
+                            <i class="fa-solid fa-lock mr-1"></i> लॉक करें
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Dashboard Stats Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-blue-100 text-[#0f294a] flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-file-circle-check"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-semibold text-slate-500 uppercase">कुल अपलोड डॉक्यूमेंट्स</p>
+                            <p id="statTotalDocs" class="text-2xl font-bold text-slate-800 mt-0.5">0</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-orange-100 text-[#ff6b00] flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-cloud-arrow-down"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-semibold text-slate-500 uppercase">कुल डाउनलोड्स (Downloads)</p>
+                            <p id="statTotalDownloads" class="text-2xl font-bold text-slate-800 mt-0.5">0</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-xl shrink-0">
+                            <i class="fa-solid fa-indian-rupee-sign"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs font-semibold text-slate-500 uppercase">कुल कलेक्शन (Collection)</p>
+                            <p id="statTotalCollection" class="text-2xl font-bold text-emerald-700 mt-0.5">₹0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upload Form & Recent List Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    
+                    <!-- Left: Upload New Document Form -->
+                    <div class="lg:col-span-5 bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden self-start">
+                        <div class="govt-gradient text-white px-5 py-3.5">
+                            <h3 class="font-bold text-base flex items-center gap-2">
+                                <i class="fa-solid fa-cloud-arrow-up text-[#FF9933]"></i>
+                                <span>नया डॉक्यूमेंट अपलोड करें</span>
+                            </h3>
+                        </div>
+                        <form id="uploadDocForm" onsubmit="handleUploadDocument(event)" class="p-5 space-y-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">आवेदक का नाम (Applicant Name) *</label>
+                                <input type="text" id="upApplicantName" required placeholder="उदाहरण: Kailash Chand"
+                                    class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-[#0f294a] outline-none text-sm">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">पिता / पति का नाम (Father's Name) *</label>
+                                <input type="text" id="upFatherName" required placeholder="उदाहरण: Bhanwar Lal"
+                                    class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-[#0f294a] outline-none text-sm">
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">मोबाइल नंबर (Mobile) *</label>
+                                    <input type="tel" id="upMobile" required pattern="[0-9]{10}" maxlength="10" placeholder="10 अंकों का नंबर"
+                                        class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-[#0f294a] outline-none text-sm">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">डाउनलोड शुल्क (Fee ₹) *</label>
+                                    <input type="number" id="upFee" required min="5" max="500" value="20"
+                                        class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-[#0f294a] outline-none text-sm font-bold text-emerald-700">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">डॉक्यूमेंट का प्रकार (Document Type) *</label>
+                                <select id="upDocType" required
+                                    class="w-full px-3.5 py-2 rounded-xl border border-slate-300 focus:ring-2 focus:ring-[#0f294a] outline-none text-sm bg-white">
+                                    <option value="जाति प्रमाण पत्र (Caste Certificate)">जाति प्रमाण पत्र (Caste Certificate)</option>
+                                    <option value="मूल निवास प्रमाण पत्र (Bonafide Residence)">मूल निवास प्रमाण पत्र (Bonafide Residence)</option>
+                                    <option value="जन आधार कार्ड (Jan Aadhaar)">जन आधार कार्ड (Jan Aadhaar)</option>
+                                    <option value="राशन कार्ड (Ration Card)">राशन कार्ड (Ration Card)</option>
+                                    <option value="आय प्रमाण पत्र (Income Certificate)">आय प्रमाण पत्र (Income Certificate)</option>
+                                    <option value="ड्राइविंग लाइसेंस (Driving Licence)">ड्राइविंग लाइसेंस (Driving Licence)</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">PDF फाइल चुनें (Attach PDF)</label>
+                                <div class="border-2 border-dashed border-slate-300 rounded-xl p-3 text-center hover:border-[#0f294a] transition bg-slate-50">
+                                    <input type="file" id="upPdfFile" accept=".pdf,image/*" class="text-xs text-slate-600 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-[#0f294a] file:text-white hover:file:bg-blue-900 cursor-pointer w-full">
+                                    <p class="text-[11px] text-slate-400 mt-1">डेमो मोड: फाइल न चुनने पर भी सिस्टम ऑटो-PDF जनरेट कर देगा।</p>
+                                </div>
+                            </div>
+
+                            <button type="submit"
+                                class="w-full saffron-accent hover:opacity-95 text-white font-bold py-2.5 rounded-xl shadow-md transition flex items-center justify-center gap-2 text-sm">
+                                <i class="fa-solid fa-plus-circle"></i>
+                                <span>पोर्टल पर लाइव अपलोड करें</span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Right: Uploaded Documents Management Table -->
+                    <div class="lg:col-span-7 bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                        <div class="bg-slate-50 border-b border-slate-200 px-5 py-3.5 flex items-center justify-between">
+                            <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
+                                <i class="fa-solid fa-list-check text-[#0f294a]"></i>
+                                <span>अपलोड किए गए डॉक्यूमेंट्स की सूची</span>
+                            </h3>
+                            <span id="adminTableCount" class="text-xs font-semibold text-slate-500">0 कुल</span>
+                        </div>
+
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-slate-100/80 text-slate-600 text-xs uppercase border-b border-slate-200">
+                                        <th class="py-3 px-4 font-bold">आवेदक व पिता का नाम</th>
+                                        <th class="py-3 px-4 font-bold">डॉक्यूमेंट / शुल्क</th>
+                                        <th class="py-3 px-4 font-bold text-right">एक्शन (Actions)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminDocumentsTable" class="divide-y divide-slate-200 text-sm">
+                                    <!-- Populated via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-300 mt-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm">
+                <div class="text-center sm:text-left">
+                    <p class="font-bold text-white">Razz E Mitra & CSC Centre</p>
+                    <p class="text-slate-400 mt-0.5">मुख्य चौराहा, कोलासर पश्चिम, बज्जू (बीकानेर, राजस्थान)</p>
+                </div>
+                <div class="flex items-center gap-4 text-slate-400">
+                    <span><i class="fa-solid fa-shield-check text-emerald-400 mr-1"></i> सुरक्षित डिजिटल सेवा</span>
+                    <span>•</span>
+                    <span>UPI ID: <strong class="text-white">razzemitra@upi</strong></span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========================================== -->
+    <!-- UPI PAYMENT & DOWNLOAD MODAL               -->
+    <!-- ========================================== -->
+    <div id="paymentModal" class="fixed inset-0 z-50 hidden bg-slate-900/70 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl border border-slate-200 overflow-hidden animate-[fadeIn_0.2s_ease-out]">
+            
+            <!-- Modal Header -->
+            <div class="govt-gradient text-white px-5 py-4 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-qrcode text-[#FF9933] text-lg"></i>
+                    <h3 class="font-bold text-base">ई-मित्र शुल्क भुगतान (UPI Payment)</h3>
+                </div>
+                <button onclick="closePaymentModal()" class="text-white/80 hover:text-white p-1">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <!-- Step 1: Payment QR & Details -->
+            <div id="paymentStepPending" class="p-5 sm:p-6 space-y-4">
+                <!-- Document Summary Box -->
+                <div class="bg-slate-50 rounded-xl p-3.5 border border-slate-200 text-sm space-y-1">
+                    <div class="flex justify-between">
+                        <span class="text-slate-500">आवेदक का नाम:</span>
+                        <span id="payApplicantName" class="font-bold text-slate-800">-</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-500">पिता का नाम:</span>
+                        <span id="payFatherName" class="font-medium text-slate-700">-</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-500">डॉक्यूमेंट:</span>
+                        <span id="payDocType" class="font-semibold text-[#0f294a]">-</span>
+                    </div>
+                    <div class="border-t border-slate-200 pt-2 mt-2 flex justify-between items-center">
+                        <span class="font-bold text-slate-700">कुल देय शुल्क (Payable Fee):</span>
+                        <span id="payAmount" class="text-xl font-extrabold text-emerald-600">₹20</span>
+                    </div>
+                </div>
+
+                <!-- Simulated QR Code Box -->
+                <div class="text-center bg-white border-2 border-dashed border-blue-200 rounded-2xl p-4">
+                    <p class="text-xs font-semibold text-slate-600 mb-2">PhonePe / Google Pay / Paytm से स्कैन करें</p>
+                    <!-- Inline SVG QR Code -->
+                    <div class="w-40 h-40 mx-auto bg-white p-2 rounded-xl shadow-sm border border-slate-200 flex items-center justify-center">
+                        <svg viewBox="0 0 100 100" class="w-full h-full text-slate-900">
+                            <rect x="5" y="5" width="25" height="25" fill="none" stroke="currentColor" stroke-width="5"/>
+                            <rect x="12" y="12" width="11" height="11" fill="currentColor"/>
+                            <rect x="70" y="5" width="25" height="25" fill="none" stroke="currentColor" stroke-width="5"/>
+                            <rect x="77" y="12" width="11" height="11" fill="currentColor"/>
+                            <rect x="5" y="70" width="25" height="25" fill="none" stroke="currentColor" stroke-width="5"/>
+                            <rect x="12" y="77" width="11" height="11" fill="currentColor"/>
+                            <!-- QR Pattern blocks -->
+                            <rect x="40" y="8" width="6" height="6" fill="currentColor"/>
+                            <rect x="52" y="8" width="10" height="6" fill="currentColor"/>
+                            <rect x="40" y="20" width="12" height="6" fill="currentColor"/>
+                            <rect x="8" y="40" width="10" height="6" fill="currentColor"/>
+                            <rect x="24" y="40" width="6" height="12" fill="currentColor"/>
+                            <rect x="40" y="40" width="20" height="20" fill="#0f294a" rx="3"/>
+                            <text x="50" y="53" font-size="8" fill="white" text-anchor="middle" font-weight="bold">UPI</text>
+                            <rect x="68" y="40" width="8" height="14" fill="currentColor"/>
+                            <rect x="82" y="42" width="12" height="6" fill="currentColor"/>
+                            <rect x="40" y="68" width="6" height="12" fill="currentColor"/>
+                            <rect x="52" y="72" width="14" height="6" fill="currentColor"/>
+                            <rect x="72" y="70" width="10" height="10" fill="currentColor"/>
+                            <rect x="86" y="82" width="8" height="12" fill="currentColor"/>
+                            <rect x="42" y="86" width="16" height="6" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <div class="mt-2.5 flex items-center justify-center gap-2">
+                        <span class="text-xs font-mono bg-slate-100 px-2.5 py-1 rounded-md border border-slate-200 text-slate-700 font-semibold">
+                            razzemitra@upi
+                        </span>
+                        <button onclick="copyUpiId()" class="text-xs text-[#0f294a] hover:text-[#ff6b00] font-semibold">
+                            <i class="fa-regular fa-copy"></i> Copy
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Simulate Payment Button -->
+                <button onclick="simulatePaymentSuccess()"
+                    class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl shadow-md transition flex items-center justify-center gap-2 text-sm">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span>Simulate Payment Success (पेमेंट सफल करें)</span>
+                </button>
+            </div>
+
+            <!-- Step 2: Payment Success & Download Unlocked -->
+            <div id="paymentStepSuccess" class="hidden p-6 text-center space-y-4">
+                <div class="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto text-3xl animate-bounce">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold text-emerald-700">पेमेंट सफल रहा! (Payment Successful)</h4>
+                    <p class="text-xs text-slate-500 mt-1">Transaction ID: <span id="txnIdDisplay" class="font-mono font-bold text-slate-700">TXN9823412</span></p>
+                </div>
+
+                <div class="bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-xs text-emerald-800">
+                    आपका डॉक्यूमेंट अनलॉक हो गया है। नीचे दिए गए बटन पर क्लिक करके अपनी रसीद व प्रमाण पत्र डाउनलोड / प्रिंट करें।
+                </div>
+
+                <div class="space-y-2.5 pt-1">
+                    <button onclick="openCertificatePreview()"
+                        class="w-full govt-gradient hover:opacity-95 text-white font-bold py-3 rounded-xl shadow-md transition flex items-center justify-center gap-2 text-sm">
+                        <i class="fa-solid fa-file-pdf text-[#FF9933]"></i>
+                        <span>Download / Print PDF Certificate</span>
+                    </button>
+                    <button onclick="closePaymentModal()"
+                        class="w-full py-2 text-xs font-semibold text-slate-500 hover:text-slate-800">
+                        बंद करें (Close)
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- PRINTABLE CERTIFICATE / RECEIPT MODAL      -->
+    <!-- ========================================== -->
+    <div id="certificateModal" class="fixed inset-0 z-50 hidden bg-slate-900/75 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-2xl max-w-2xl w-full shadow-2xl overflow-hidden my-auto">
+            <div class="bg-slate-800 text-white px-5 py-3 flex items-center justify-between">
+                <span class="text-sm font-semibold"><i class="fa-solid fa-file-shield mr-1.5 text-emerald-400"></i> डिजिटल प्रमाण पत्र व भुगतान रसीद</span>
+                <div class="flex items-center gap-2">
+                    <button onclick="window.print()" class="bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold px-3.5 py-1.5 rounded-lg flex items-center gap-1.5 transition">
+                        <i class="fa-solid fa-print"></i> Print / Save as PDF
+                    </button>
+                    <button onclick="closeCertificateModal()" class="text-slate-300 hover:text-white px-2 py-1">
+                        <i class="fa-solid fa-xmark text-lg"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Printable Document Body -->
+            <div id="printableCertificate" class="p-6 sm:p-8 bg-white text-slate-800 border-4 border-double border-[#0f294a] m-4 rounded-lg">
+                <div class="flex items-center justify-between border-b-2 border-[#0f294a] pb-4">
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-extrabold text-[#0f294a]">Razz E Mitra & CSC Centre</h2>
+                        <p class="text-xs sm:text-sm font-semibold text-slate-600">मुख्य चौराहा, कोलासर पश्चिम, बज्जू (बीकानेर, राजस्थान)</p>
+                        <p class="text-xs text-slate-500 mt-0.5">ई-मित्र कियोस्क डिजिटल सेवा रसीद व प्रमाण पत्र प्रति</p>
+                    </div>
+                    <div class="text-right">
+                        <span class="inline-block bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded border border-emerald-300">
+                            PAID & VERIFIED
+                        </span>
+                        <p id="certDate" class="text-xs text-slate-500 mt-1">दिनांक: -</p>
+                    </div>
+                </div>
+
+                <div class="my-6 space-y-3 text-sm">
+                    <div class="grid grid-cols-2 gap-2 bg-slate-50 p-4 rounded-xl border border-slate-200">
+                        <div>
+                            <p class="text-xs text-slate-500">टोकन / रसीद संख्या:</p>
+                            <p id="certTokenNo" class="font-mono font-bold text-slate-800">EM-2026-8841</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500">भुगतान शुल्क (Paid Amount):</p>
+                            <p id="certFeePaid" class="font-bold text-emerald-700">₹20.00 (UPI)</p>
+                        </div>
+                    </div>
+
+                    <table class="w-full border border-slate-300 text-sm mt-4">
+                        <tbody>
+                            <tr class="border-b border-slate-300">
+                                <td class="py-2.5 px-4 bg-slate-100 font-bold w-2/5">आवेदक का नाम (Applicant Name)</td>
+                                <td id="certApplicant" class="py-2.5 px-4 font-bold text-slate-900">-</td>
+                            </tr>
+                            <tr class="border-b border-slate-300">
+                                <td class="py-2.5 px-4 bg-slate-100 font-bold">पिता / पति का नाम (Father Name)</td>
+                                <td id="certFather" class="py-2.5 px-4 font-semibold">-</td>
+                            </tr>
+                            <tr class="border-b border-slate-300">
+                                <td class="py-2.5 px-4 bg-slate-100 font-bold">दस्तावेज़ का प्रकार (Document Type)</td>
+                                <td id="certDocType" class="py-2.5 px-4 font-bold text-[#0f294a]">-</td>
+                            </tr>
+                            <tr>
+                                <td class="py-2.5 px-4 bg-slate-100 font-bold">जारी करने की तिथि (Ready Date)</td>
+                                <td id="certReadyDate" class="py-2.5 px-4">-</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-8 pt-4 border-t border-slate-200 flex items-end justify-between text-xs text-slate-500">
+                    <div>
+                        <p>यह एक कंप्यूटर जनित डिजिटल प्रति है।</p>
+                        <p>सहायता के लिए संपर्क करें: Razz E Mitra, कोलासर पश्चिम, बज्जू</p>
+                    </div>
+                    <div class="text-right">
+                        <div class="w-28 border-b border-slate-400 mb-1 ml-auto"></div>
+                        <p class="font-bold text-slate-700">अधिकृत कियोस्क हस्ताक्षर</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TOAST NOTIFICATION                         -->
+    <!-- ========================================== -->
+    <div id="toastNotification" class="fixed bottom-5 right-5 z-50 transform translate-y-24 opacity-0 transition-all duration-300 max-w-sm w-full bg-slate-900 text-white px-4 py-3.5 rounded-xl shadow-2xl border border-slate-700 flex items-start gap-3">
+        <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400 text-lg mt-0.5"></i>
+        <div class="text-xs sm:text-sm">
+            <p id="toastTitle" class="font-bold">सूचना</p>
+            <p id="toastMessage" class="text-slate-300 mt-0.5 leading-relaxed">-</p>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- JAVASCRIPT LOGIC                           -->
+    <!-- ========================================== -->
+    <script>
+        // Storage Key
+        const STORAGE_KEY = 'razz_emitra_docs_v1';
+        const STATS_KEY = 'razz_emitra_stats_v1';
+
+        // Initial Realistic Rajasthan / Bikaner Sample Data
+        const defaultDocuments = [
+            {
+                id: 'DOC-1001',
+                applicantName: 'Rameshwar Lal',
+                fatherName: 'Hanuman Ram',
+                mobile: '9829011223',
+                docType: 'जाति प्रमाण पत्र (Caste Certificate)',
+                readyDate: '19 Nov 2026',
+                fee: 20,
+                status: 'Ready to Download',
+                fileName: 'Caste_Cert_Rameshwar.pdf'
+            },
+            {
+                id: 'DOC-1002',
+                applicantName: 'Sunita Devi',
+                fatherName: 'Omprakash Bishnoi',
+                mobile: '9414055667',
+                docType: 'मूल निवास प्रमाण पत्र (Bonafide Residence)',
+                readyDate: '20 Nov 2026',
+                fee: 20,
+                status: 'Ready to Download',
+                fileName: 'Bonafide_Sunita.pdf'
+            },
+            {
+                id: 'DOC-1003',
+                applicantName: 'Mahendra Singh',
+                fatherName: 'Bhanwar Singh',
+                mobile: '9784512390',
+                docType: 'जन आधार कार्ड (Jan Aadhaar)',
+                readyDate: '20 Nov 2026',
+                fee: 30,
+                status: 'Ready to Download',
+                fileName: 'JanAadhaar_Mahendra.pdf'
+            },
+            {
+                id: 'DOC-1004',
+                applicantName: 'Pooja Kumari',
+                fatherName: 'Sohan Lal',
+                mobile: '9602344556',
+                docType: 'आय प्रमाण पत्र (Income Certificate)',
+                readyDate: '21 Nov 2026',
+                fee: 20,
+                status: 'Ready to Download',
+                fileName: 'Income_Pooja.pdf'
+            },
+            {
+                id: 'DOC-1005',
+                applicantName: 'Ramratan Godara',
+                fatherName: 'Kishna Ram',
+                mobile: '9928199887',
+                docType: 'राशन कार्ड (Ration Card)',
+                readyDate: '21 Nov 2026',
+                fee: 30,
+                status: 'Ready to Download',
+                fileName: 'RationCard_Ramratan.pdf'
+            },
+            {
+                id: 'DOC-1006',
+                applicantName: 'Dinesh Kumar',
+                fatherName: 'Mangla Ram',
+                mobile: '9460177889',
+                docType: 'ड्राइविंग लाइसेंस (Driving Licence)',
+                readyDate: '21 Nov 2026',
+                fee: 40,
+                status: 'Ready to Download',
+                fileName: 'DL_Dinesh.pdf'
+            }
+        ];
+
+        // App State
+        let documents = [];
+        let stats = { downloads: 14, collection: 320 };
+        let selectedDocForPayment = null;
+        let isAdminAuthenticated = false;
+
+        // Initialize App on Load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadData();
+            renderCustomerDocuments(documents);
+            updateAdminDashboard();
+        });
+
+        // Load from localStorage or fallback to defaults
+        function loadData() {
+            const savedDocs = localStorage.getItem(STORAGE_KEY);
+            const savedStats = localStorage.getItem(STATS_KEY);
+
+            if (savedDocs) {
+                documents = JSON.parse(savedDocs);
+            } else {
+                documents = [...defaultDocuments];
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(documents));
+            }
+
+            if (savedStats) {
+                stats = JSON.parse(savedStats);
+            } else {
+                localStorage.setItem(STATS_KEY, JSON.stringify(stats));
+            }
+        }
+
+        function saveData() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(documents));
+            localStorage.setItem(STATS_KEY, JSON.stringify(stats));
+        }
+
+        // Switch Navigation Mode (Customer vs Admin)
+        function switchMode(mode) {
+            const customerView = document.getElementById('customerView');
+            const adminView = document.getElementById('adminView');
+            const btnCustomer = document.getElementById('btnCustomerMode');
+            const btnAdmin = document.getElementById('btnAdminMode');
+
+            if (mode === 'customer') {
+                customerView.classList.remove('hidden');
+                adminView.classList.add('hidden');
+                
+                btnCustomer.className = "flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 bg-white text-[#0f294a] shadow";
+                btnAdmin.className = "flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 text-blue-100 hover:text-white";
+                
+                renderCustomerDocuments(documents);
+            } else {
+                customerView.classList.add('hidden');
+                adminView.classList.remove('hidden');
+                
+                btnAdmin.className = "flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 bg-white text-[#0f294a] shadow";
+                btnCustomer.className = "flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 text-blue-100 hover:text-white";
+
+                if (isAdminAuthenticated) {
+                    document.getElementById('adminPinGate').classList.add('hidden');
+                    document.getElementById('adminDashboardContent').classList.remove('hidden');
+                    updateAdminDashboard();
+                } else {
+                    document.getElementById('adminPinGate').classList.remove('hidden');
+                    document.getElementById('adminDashboardContent').classList.add('hidden');
+                    document.getElementById('adminPinInput').value = '';
+                    document.getElementById('pinErrorMsg').classList.add('hidden');
+                }
+            }
+        }
+
+        // ==========================================
+        // CUSTOMER SEARCH & RENDER LOGIC
+        // ==========================================
+        function handleSearch(e) {
+            e.preventDefault();
+            const nameQuery = document.getElementById('searchApplicantName').value.trim().toLowerCase();
+            const fatherQuery = document.getElementById('searchFatherName').value.trim().toLowerCase();
+            const docTypeQuery = document.getElementById('searchDocType').value;
+
+            const filtered = documents.filter(doc => {
+                const matchName = !nameQuery || doc.applicantName.toLowerCase().includes(nameQuery);
+                const matchFather = !fatherQuery || doc.fatherName.toLowerCase().includes(fatherQuery);
+                const matchType = docTypeQuery === 'ALL' || doc.docType === docTypeQuery;
+                return matchName && matchFather && matchType;
+            });
+
+            document.getElementById('resultsHeading').innerHTML = `
+                <i class="fa-solid fa-magnifying-glass text-[#ff6b00]"></i>
+                <span>सर्च परिणाम (Search Results)</span>
+            `;
+            renderCustomerDocuments(filtered);
+        }
+
+        function showAllSampleRecords() {
+            document.getElementById('searchApplicantName').value = '';
+            document.getElementById('searchFatherName').value = '';
+            document.getElementById('searchDocType').value = 'ALL';
+            document.getElementById('resultsHeading').innerHTML = `
+                <i class="fa-solid fa-folder-open text-[#0f294a]"></i>
+                <span>सभी उपलब्ध तैयार डॉक्यूमेंट्स (All Ready Documents)</span>
+            `;
+            renderCustomerDocuments(documents);
+            showToast('सभी रिकॉर्ड्स लोड किए गए', `कुल ${documents.length} तैयार डॉक्यूमेंट्स दिखाए जा रहे हैं।`);
+        }
+
+        function resetSearch() {
+            showAllSampleRecords();
+        }
+
+        function renderCustomerDocuments(list) {
+            const container = document.getElementById('documentsList');
+            const badge = document.getElementById('resultsCountBadge');
+            badge.textContent = `${list.length} रिकॉर्ड्स`;
+
+            if (list.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full bg-white rounded-2xl border border-slate-200 p-8 text-center">
+                        <div class="w-14 h-14 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-3 text-2xl">
+                            <i class="fa-solid fa-file-circle-xmark"></i>
+                        </div>
+                        <h4 class="text-base font-bold text-slate-700">कोई डॉक्यूमेंट नहीं मिला!</h4>
+                        <p class="text-xs sm:text-sm text-slate-500 mt-1 max-w-md mx-auto">
+                            कृपया नाम या पिता के नाम की स्पेलिंग जांचें, या सभी तैयार डॉक्यूमेंट देखने के लिए नीचे बटन दबाएं।
+                        </p>
+                        <button onclick="showAllSampleRecords()" class="mt-4 px-4 py-2 rounded-xl bg-[#0f294a] text-white text-xs font-semibold hover:bg-blue-900 transition">
+                            सभी तैयार डॉक्यूमेंट दिखाएं
+                        </button>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = list.map(doc => `
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all duration-200 flex flex-col justify-between overflow-hidden">
+                    <div class="p-5 space-y-3">
+                        <div class="flex items-start justify-between gap-2">
+                            <span class="inline-flex items-center gap-1.5 text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-full">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                ${doc.status}
+                            </span>
+                            <span class="text-xs font-mono text-slate-400">${doc.id}</span>
+                        </div>
+
+                        <div>
+                            <h4 class="text-base font-bold text-slate-800">${escapeHtml(doc.applicantName)}</h4>
+                            <p class="text-xs text-slate-500 mt-0.5">
+                                <span class="font-semibold text-slate-600">पिता/पति:</span> ${escapeHtml(doc.fatherName)}
+                            </p>
+                        </div>
+
+                        <div class="bg-blue-50/70 rounded-xl p-2.5 border border-blue-100">
+                            <p class="text-xs font-bold text-[#0f294a] flex items-center gap-1.5">
+                                <i class="fa-solid fa-file-pdf text-red-500"></i>
+                                <span>${escapeHtml(doc.docType)}</span>
+                            </p>
+                            <p class="text-[11px] text-slate-500 mt-1">
+                                <i class="fa-regular fa-calendar mr-1"></i> तैयार तिथि: ${escapeHtml(doc.readyDate)}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 px-5 py-3.5 border-t border-slate-200 flex items-center justify-between gap-3">
+                        <div>
+                            <span class="block text-[10px] uppercase font-bold text-slate-400">निर्धारित शुल्क</span>
+                            <span class="text-lg font-extrabold text-slate-800">₹${doc.fee}</span>
+                        </div>
+                        <button onclick="openPaymentModal('${doc.id}')"
+                            class="govt-gradient hover:opacity-95 text-white text-xs sm:text-sm font-bold px-4 py-2.5 rounded-xl shadow transition flex items-center gap-2">
+                            <i class="fa-solid fa-download"></i>
+                            <span>Pay ₹${doc.fee} & Download</span>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ==========================================
+        // UPI PAYMENT & DOWNLOAD MODAL FLOW
+        // ==========================================
+        function openPaymentModal(docId) {
+            const doc = documents.find(d => d.id === docId);
+            if (!doc) return;
+
+            selectedDocForPayment = doc;
+
+            document.getElementById('payApplicantName').textContent = doc.applicantName;
+            document.getElementById('payFatherName').textContent = doc.fatherName;
+            document.getElementById('payDocType').textContent = doc.docType;
+            document.getElementById('payAmount').textContent = `₹${doc.fee}`;
+
+            document.getElementById('paymentStepPending').classList.remove('hidden');
+            document.getElementById('paymentStepSuccess').classList.add('hidden');
+            document.getElementById('paymentModal').classList.remove('hidden');
+        }
+
+        function closePaymentModal() {
+            document.getElementById('paymentModal').classList.add('hidden');
+        }
+
+        function copyUpiId() {
+            const tempInput = document.createElement('input');
+            tempInput.value = 'razzemitra@upi';
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            showToast('UPI ID कॉपी हो गई', 'razzemitra@upi को क्लिपबोर्ड पर कॉपी कर लिया गया है।');
+        }
+
+        function simulatePaymentSuccess() {
+            if (!selectedDocForPayment) return;
+
+            // Update Stats
+            stats.downloads += 1;
+            stats.collection += Number(selectedDocForPayment.fee);
+            saveData();
+            updateAdminDashboard();
+
+            // Generate Random TXN ID
+            const randomTxn = 'UPI' + Math.floor(10000000 + Math.random() * 90000000);
+            document.getElementById('txnIdDisplay').textContent = randomTxn;
+
+            // Switch Modal Step
+            document.getElementById('paymentStepPending').classList.add('hidden');
+            document.getElementById('paymentStepSuccess').classList.remove('hidden');
+
+            showToast('पेमेंट सफल!', `₹${selectedDocForPayment.fee} प्राप्त हुए। अब आप PDF डाउनलोड कर सकते हैं।`);
+        }
+
+        function openCertificatePreview() {
+            if (!selectedDocForPayment) return;
+            closePaymentModal();
+
+            const today = new Date().toLocaleDateString('hi-IN', { day: '2-digit', month: 'short', year: 'numeric' });
+            document.getElementById('certDate').textContent = `दिनांक: ${today}`;
+            document.getElementById('certTokenNo').textContent = selectedDocForPayment.id;
+            document.getElementById('certFeePaid').textContent = `₹${selectedDocForPayment.fee}.00 (UPI Verified)`;
+            document.getElementById('certApplicant').textContent = selectedDocForPayment.applicantName;
+            document.getElementById('certFather').textContent = selectedDocForPayment.fatherName;
+            document.getElementById('certDocType').textContent = selectedDocForPayment.docType;
+            document.getElementById('certReadyDate').textContent = selectedDocForPayment.readyDate;
+
+            document.getElementById('certificateModal').classList.remove('hidden');
+        }
+
+        function closeCertificateModal() {
+            document.getElementById('certificateModal').classList.add('hidden');
+        }
+
+        // ==========================================
+        // ADMIN PANEL LOGIC
+        // ==========================================
+        function verifyAdminPin(e) {
+            e.preventDefault();
+            const pin = document.getElementById('adminPinInput').value;
+            if (pin === '1234') {
+                isAdminAuthenticated = true;
+                document.getElementById('adminPinGate').classList.add('hidden');
+                document.getElementById('adminDashboardContent').classList.remove('hidden');
+                updateAdminDashboard();
+                showToast('एडमिन लॉगिन सफल', 'Razz E Mitra डैशबोर्ड में आपका स्वागत है।');
+            } else {
+                document.getElementById('pinErrorMsg').classList.remove('hidden');
+            }
+        }
+
+        function logoutAdmin() {
+            isAdminAuthenticated = false;
+            switchMode('admin');
+        }
+
+        function updateAdminDashboard() {
+            document.getElementById('statTotalDocs').textContent = documents.length;
+            document.getElementById('statTotalDownloads').textContent = stats.downloads;
+            document.getElementById('statTotalCollection').textContent = `₹${stats.collection}`;
+            document.getElementById('adminTableCount').textContent = `${documents.length} कुल`;
+
+            const tbody = document.getElementById('adminDocumentsTable');
+            if (documents.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="3" class="py-6 text-center text-slate-400 text-xs">कोई डॉक्यूमेंट अपलोड नहीं है।</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = documents.map(doc => `
+                <tr class="hover:bg-slate-50 transition">
+                    <td class="py-3.5 px-4">
+                        <p class="font-bold text-slate-800">${escapeHtml(doc.applicantName)}</p>
+                        <p class="text-xs text-slate-500">पिता: ${escapeHtml(doc.fatherName)}</p>
+                        <p class="text-[11px] text-slate-400 mt-0.5"><i class="fa-solid fa-phone text-[10px] mr-1"></i>${escapeHtml(doc.mobile || 'N/A')}</p>
+                    </td>
+                    <td class="py-3.5 px-4">
+                        <span class="inline-block text-xs font-semibold text-[#0f294a] bg-blue-50 px-2 py-0.5 rounded border border-blue-100">
+                            ${escapeHtml(doc.docType)}
+                        </span>
+                        <div class="flex items-center gap-2 mt-1 text-xs">
+                            <span class="font-bold text-emerald-700">शुल्क: ₹${doc.fee}</span>
+                            <span class="text-slate-400">•</span>
+                            <span class="text-slate-500">${escapeHtml(doc.readyDate)}</span>
+                        </div>
+                    </td>
+                    <td class="py-3.5 px-4 text-right">
+                        <div class="inline-flex items-center gap-1.5">
+                            <button onclick="sendWhatsAppLink('${doc.id}')" title="WhatsApp पर लिंक भेजें"
+                                class="px-2.5 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white border border-emerald-200 text-xs font-semibold transition flex items-center gap-1">
+                                <i class="fa-brands fa-whatsapp text-sm"></i>
+                                <span class="hidden sm:inline">WhatsApp</span>
+                            </button>
+                            <button onclick="deleteDocument('${doc.id}')" title="डिलीट करें"
+                                class="p-1.5 rounded-lg bg-red-50 text-red-600 hover:bg-red-600 hover:text-white border border-red-200 text-xs transition">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function handleUploadDocument(e) {
+            e.preventDefault();
+            const applicantName = document.getElementById('upApplicantName').value.trim();
+            const fatherName = document.getElementById('upFatherName').value.trim();
+            const mobile = document.getElementById('upMobile').value.trim();
+            const fee = Number(document.getElementById('upFee').value) || 20;
+            const docType = document.getElementById('upDocType').value;
+            const fileInput = document.getElementById('upPdfFile');
+            const fileName = fileInput.files.length > 0 ? fileInput.files[0].name : `${docType.split(' ')[0]}_${applicantName.replace(/\s+/g, '_')}.pdf`;
+
+            const today = new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+            const newDoc = {
+                id: 'DOC-' + Math.floor(1000 + Math.random() * 9000),
+                applicantName,
+                fatherName,
+                mobile,
+                docType,
+                readyDate: today,
+                fee,
+                status: 'Ready to Download',
+                fileName
+            };
+
+            documents.unshift(newDoc);
+            saveData();
+            updateAdminDashboard();
+            document.getElementById('uploadDocForm').reset();
+            document.getElementById('upFee').value = 20;
+
+            showToast('डॉक्यूमेंट लाइव अपलोड हो गया!', `${applicantName} का ${docType} अब ग्राहक पोर्टल पर सर्च के लिए उपलब्ध है।`);
+        }
+
+        function deleteDocument(docId) {
+            documents = documents.filter(d => d.id !== docId);
+            saveData();
+            updateAdminDashboard();
+            showToast('रिकॉर्ड हटाया गया', 'डॉक्यूमेंट को पोर्टल सूची से हटा दिया गया है।');
+        }
+
+        function sendWhatsAppLink(docId) {
+            const doc = documents.find(d => d.id === docId);
+            if (!doc) return;
+
+            const msg = `नमस्ते ${doc.applicantName} जी, आपका "${doc.docType}" Razz E Mitra & CSC Centre (कोलासर पश्चिम, बज्जू) पर तैयार है। ₹${doc.fee} शुल्क जमा कर पोर्टल से डाउनलोड करें।`;
+            showToast(`WhatsApp मैसेज भेजा गया (${doc.mobile})`, msg);
+        }
+
+        function resetDemoData() {
+            documents = [...defaultDocuments];
+            stats = { downloads: 14, collection: 320 };
+            saveData();
+            updateAdminDashboard();
+            showToast('डेमो डेटा रीसेट', 'सभी डिफ़ॉल्ट सैंपल रिकॉर्ड्स पुनः लोड कर दिए गए हैं।');
+        }
+
+        // ==========================================
+        // HELPERS & TOAST
+        // ==========================================
+        let toastTimeout;
+        function showToast(title, message) {
+            const toast = document.getElementById('toastNotification');
+            document.getElementById('toastTitle').textContent = title;
+            document.getElementById('toastMessage').textContent = message;
+
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 4500);
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+    </script>
+</body>
+</html>
